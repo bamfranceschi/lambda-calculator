@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
-import { numbers } from "./data";
-import { operators } from "./data";
-import { specials } from "./data";
+import { numbers, operators, specials } from "./data";
 import Logo from "./components/DisplayComponents/Logo";
 import Numbers from "./components/ButtonComponents/NumberButtons/Numbers";
 import Operators from "./components/ButtonComponents/OperatorButtons/Operators";
@@ -16,9 +14,12 @@ import Display from "./components/DisplayComponents/Display";
 // Logo has already been provided for you. Do the same for the remaining components
 
 function App() {
-  const [numberData, setNumberData] = useState(numbers);
-  const [operatorData, setOperatorData] = useState(operators);
-  const [specialsData, setSpecialsData] = useState(specials);
+  const [displayValue, setDisplayValue] = useState("");
+  const displayNum = number => {
+    setDisplayValue(displayValue => displayValue + number);
+  };
+  // const [operatorData, setOperatorData] = useState(operators);
+  // const [specialsData, setSpecialsData] = useState(specials);
 
   const appStyle = {
     height: 400
@@ -34,8 +35,8 @@ function App() {
     <div className="container">
       <Logo />
       <div style={appStyle} className="App">
-        <Display />
-        <Numbers />
+        <Display number={displayValue} />
+        <Numbers displayNum={displayNum} />
         <Operators />
         <Specials />
       </div>
